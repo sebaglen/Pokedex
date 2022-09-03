@@ -1,23 +1,23 @@
 import { Box, Chip, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const colors = {
   Fire: "#F96D6B",
   Grass: "#49D0B0",
   Water: "#76BCFF",
-  Electric: "#FCD973"
-
+  Electric: "#FCD973",
 };
 
-
 export const PokeCard = ({ pokemon }) => {
-//console.log(colors.Fire) // "#F96D6B"
-//console.log(pokemon.type) // Fire
-// console.log(colors[pokemon.type])
-  
-return (
+  const navigate = useNavigate();
+  //console.log(colors.Fire) // "#F96D6B"
+  //console.log(pokemon.type) // Fire
+  //console.log(colors[pokemon.type])
+
+  return (
     <Box
       onClick={(e) => {
-        console.log("I was clicked");
+        navigate("/pokemon/" + pokemon.name);
       }}
       sx={{ width: "50%" }}
     >
