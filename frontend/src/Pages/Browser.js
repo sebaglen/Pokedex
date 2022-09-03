@@ -3,8 +3,8 @@ import { PokeCard } from "../Components/PokeCard";
 
 const pokemons = [
   { name: "Charizard", type: "Fire" },
-  { name: "Bulbosaur", type: "Grass" },
-  { name: "Bulbosaur", type: "Grass" },
+  { name: "Bulbosaur", type: "Electric" },
+  { name: "Bulbosaur", type: "Water" },
   { name: "Bulbosaur", type: "Grass" },
   { name: "Bulbosaur", type: "Grass" },
 ];
