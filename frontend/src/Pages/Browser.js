@@ -1,25 +1,45 @@
-import { Container, Stack, Typography } from "@mui/material";
+import { Container, Stack, Box, Typography, CircularProgress } from "@mui/material";
+import { useEffect, useState } from "react";
 import { PokeCard } from "../Components/PokeCard";
 
-const pokemons = [
-  { name: "Charizard", type: "Fire" },
-  { name: "Bulbosaur", type: "Electric" },
-  { name: "Bulbosaur", type: "Water" },
-  { name: "Bulbosaur", type: "Grass" },
-  { name: "Bulbosaur", type: "Grass" },
-];
 export const Browser = () => {
+  //Variabel som endrer seg hele tiden.
+  const [allPokemon, setAllPokemon] = useState([]);
+
+  //Når siden laster, så gjør vi dette
+  useEffect(() => {
+    fetch("api/all-pokemon")
+      .then((res) => res.json())
+      .then((data) => setAllPokemon(data));
+  }, []);
+  
+
   return (
     <Container sx={{ paddingTop: "76px" }}>
-      <Typography sx={{ paddingBottom: "24px" }} variant="h3">
-        Pokedex
-      </Typography>
+      {allPokemon.length === 0 && (
+        <Stack height="100vh">
+        <CircularProgress
+          sx={{
+            color: "purple",
+            margin: "auto",
+          }}
+        />
+        </Stack>
+      )}
 
-      <Stack direction="row" sx={{ flexWrap: "wrap" }}>
-        {pokemons.map((pokemon) => (
-          <PokeCard pokemon={pokemon} />
-        ))}
-      </Stack>
+      {allPokemon.length > 0 && (
+        <Box>
+          <Typography sx={{ paddingBottom: "24px" }} variant="h3">
+            Pokédex
+          </Typography>
+
+          <Stack direction="row" sx={{ flexWrap: "wrap" }}>
+            {allPokemon.map((pokemon) => (
+              <PokeCard pokemon={pokemon} />
+            ))}
+          </Stack>
+        </Box>
+      )}
     </Container>
   );
 };

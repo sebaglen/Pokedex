@@ -1,12 +1,7 @@
 import { Box, Chip, Typography } from "@mui/material";
+import { Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
-
-const colors = {
-  Fire: "#F96D6B",
-  Grass: "#49D0B0",
-  Water: "#76BCFF",
-  Electric: "#FCD973",
-};
+import { colors, pokemons } from "../helpers/data";
 
 export const PokeCard = ({ pokemon }) => {
   const navigate = useNavigate();
@@ -15,8 +10,7 @@ export const PokeCard = ({ pokemon }) => {
   //console.log(colors[pokemon.type])
 
   return (
-    <Box
-      onClick={(e) => {
+    <Box onClick={() => {
         navigate("/pokemon/" + pokemon.name);
       }}
       sx={{ width: "50%" }}
@@ -24,7 +18,7 @@ export const PokeCard = ({ pokemon }) => {
       <Box
         sx={{
           padding: "60px",
-          backgroundColor: colors[pokemon.type],
+          backgroundColor: colors[pokemon.types[0]],
           marginRight: "12px",
           marginBottom: "12px",
           borderRadius: "16px",
@@ -32,6 +26,7 @@ export const PokeCard = ({ pokemon }) => {
       >
         <Typography
           sx={{
+            textTransform: "capitalize",
             paddingBottom: "12px",
             color: "white",
           }}
@@ -44,10 +39,22 @@ export const PokeCard = ({ pokemon }) => {
           sx={{
             color: "white",
             backgroundColor: "rgba(255, 255, 255, 0.4)",
+            textTransform: "capitalize",
             fontSize: "15px",
           }}
-          label={pokemon.type}
+          label={pokemon.types[0]}
         />
+        {pokemon.types.length > 1 && (
+          <Chip
+            sx={{
+              color: "white",
+              backgroundColor: "rgba(255, 255, 255, 0.4)",
+              textTransform: "capitalize",
+              fontSize: "15px",
+            }}
+            label={pokemon.types[1]}
+          />
+        )}
       </Box>
     </Box>
   );
